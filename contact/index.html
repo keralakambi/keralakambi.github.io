@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Kerala Kambi</title>
+    <!-- Font Awesome 6 CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Layout and Reset */
+        body {
+            font-family: 'Poppins', sans-serif; /* Modern font */
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e0e6ed 100%); /* Soft gradient background */
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Bold gradient header */
+            color: #ffffff;
+            padding: 20px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before { /* Decorative wave effect */
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -10%;
+            width: 120%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(-5deg);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative; /* For z-index over wave */
+            z-index: 1;
+        }
+
+        /* Main Content Styling */
+        main {
+            flex-grow: 1; /* Allows main content to fill available space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 700px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px; /* More rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .contact-container::before { /* Subtle background pattern */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(#f0f0f0 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+
+        .contact-container h1 {
+            font-size: 3rem;
+            color: #6a11cb; /* A vibrant color from header gradient */
+            margin-bottom: 40px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            display: inline-block; /* To apply border-bottom only to text */
+        }
+
+        .contact-container h1::after { /* Underline effect */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+            border-radius: 2px;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left; /* Align list items to left */
+            position: relative;
+            z-index: 1; /* Ensure content is above background pattern */
+        }
+
+        .contact-list li {
+            margin-bottom: 25px;
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            background-color: #f7faff; /* Light background for each item */
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid transparent; /* Placeholder for hover effect */
+        }
+
+        .contact-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* New wrapper for icon and label */
+        .contact-meta {
+            display: flex; /* Keeps icon and label together on desktop */
+            align-items: center;
+            flex-shrink: 0;
+            /* Removed width: 300px to allow it to shrink-wrap its content */
+            margin-right: 30px; /* Added a consistent, moderate gap for desktop view */
+        }
+
+        /* Icon base style */
+        .contact-meta i {
+            font-size: 1.5rem;
+            margin-right: 20px;
+            width: 30px; /* Fixed width for alignment */
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        /* Label base style */
+        .contact-meta span.label {
+            font-weight: 600;
+            color: #4a4a4a;
+            font-size: 1.1rem;
+        }
+        
+        /* Link base style (occupies remaining space on desktop) */
+        .contact-list li a {
+            text-decoration: none;
+            flex-grow: 1;
+            word-break: break-all;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .contact-list li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .contact-list li a:hover::after {
+            width: 100%;
+        }
+
+        /* --- BRAND-SPECIFIC STYLING --- */
+
+        /* 1. Email */
+        .contact-list li:nth-child(1) i { color: #2575fc; }
+        .contact-list li:nth-child(1) a { color: #2575fc; }
+        .contact-list li:nth-child(1) a::after { background-color: #2575fc; }
+        .contact-list li:nth-child(1):hover { border-left-color: #2575fc; }
+
+        /* 2. Matrix (Green/Teal) */
+        .contact-list li:nth-child(2) i { color: #00A389; } 
+        .contact-list li:nth-child(2) a { color: #00A389; } 
+        .contact-list li:nth-child(2) a::after { background-color: #00A389; }
+        .contact-list li:nth-child(2):hover { border-left-color: #00A389; }
+
+        /* 3. Instagram (Vibrant Gradient) */
+        .contact-list li:nth-child(3) i { 
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+        } 
+        .contact-list li:nth-child(3) a { color: #E1306C; }
+        .contact-list li:nth-child(3) a::after { background-color: #E1306C; }
+        .contact-list li:nth-child(3):hover { border-left-color: #E1306C; }
+
+        /* 4. Facebook (Classic Blue) */
+        .contact-list li:nth-child(4) i { color: #3b5998; } 
+        .contact-list li:nth-child(4) a { color: #3b5998; }
+        .contact-list li:nth-child(4) a::after { background-color: #3b5998; }
+        .contact-list li:nth-child(4):hover { border-left-color: #3b5998; }
+
+        /* 5. X (Twitter) (Black) */
+        .contact-list li:nth-child(5) i { color: #000000; } 
+        .contact-list li:nth-child(5) a { color: #000000; }
+        .contact-list li:nth-child(5) a::after { background-color: #000000; }
+        .contact-list li:nth-child(5):hover { border-left-color: #000000; }
+        
+        /* --- END BRAND-SPECIFIC STYLING --- */
+
+
+        /* Footer Styling */
+        footer {
+            background: #333;
+            color: #ffffff;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: auto; /* Push footer to bottom */
+        }
+
+        /* Responsive Adjustments for Mobile View */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .contact-container {
+                padding: 30px;
+                margin: 20px;
+            }
+            .contact-container h1 {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+            
+            /* 1. Stack the List Item Content */
+            .contact-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+            
+            /* 2. Style the Info Line (Icon + Label) */
+            .contact-meta {
+                width: 100%; /* Take full width on mobile */
+                margin-bottom: 8px; /* Spacing between the label line and the username line */
+                margin-right: 0; /* Remove desktop margin on mobile */
+            }
+
+            /* 3. Style the Username Line (Link) */
+            .contact-list li a {
+                width: 100%;
+                /* Indent the username slightly to align under the icon */
+                padding-left: 50px; 
+                box-sizing: border-box;
+                font-size: 1rem;
+            }
+            
+            /* Adjust the link underline to start where the text starts */
+            .contact-list li a::after {
+                left: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px 10px;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .contact-container {
+                padding: 20px;
+                margin: 15px;
+            }
+            .contact-container h1 {
+                font-size: 2rem;
+                margin-bottom: 25px;
+            }
+            .contact-list li {
+                padding: 12px;
+            }
+            .contact-meta {
+                /* No change needed here */
+            }
+            .contact-list li a {
+                padding-left: 40px; 
+                font-size: 0.95rem;
+            }
+            .contact-list li a::after {
+                left: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Connect with Kerala Kambi</h1>
+        <!-- Navigation would typically go here --></header>
+
+    <main>
+        <div class="contact-container">
+            <h1>Reach Out</h1>
+            <ul class="contact-list">
+                <li>
+                    <div class="contact-meta">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span class="label">Email:</span>
+                    </div>
+                    <a href="mailto:keralakambiofficial@gmail.com">keralakambiofficial@gmail.com</a>
+                </li>
+                <li>
+                    <div class="contact-meta">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <span class="label">Matrix:</span>
+                    </div>
+                    <a href="https://matrix.to/#/@keralakambi:matrix.org">@keralakambi:matrix.org</a>
+                </li>
+                <li>
+                    <div class="contact-meta">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span class="label">Instagram:</span>
+                    </div>
+                    <a href="https://instagram.com/keralakambiofficial" target="_blank">@keralakambiofficial</a>
+                </li>
+                <li>
+                    <div class="contact-meta">
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <span class="label">Facebook:</span>
+                    </div>
+                    <a href="https://www.facebook.com/profile.php?id=61583291046498" target="_blank">Kerala Kambi</a>
+                </li>
+                <li>
+                    <div class="contact-meta">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <span class="label">X (Twitter):</span>
+                    </div>
+                    <a href="https://x.com/keralakambi" target="_blank">@keralakambi</a>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Kerala Kambi. All rights reserved.</p>
+    </footer>
+</body>
+</html>
